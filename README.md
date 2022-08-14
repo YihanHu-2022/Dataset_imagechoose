@@ -9,9 +9,11 @@
 * 人物不能被遮挡，多人物图片最好站位分散尽量少有交叉
 ## 工具的使用
 首先大家需将此工具下载到本地并配置flask：
+
     git clone git@github.com:huangfeihongthegreast123/Dataset_imagechoose.git
     cd Dataset_imagechoose
     pip install -r requirements.txt
+    
 之后大家需要按照后续指示将`各自的`图片文件夹下载到`static目录`下，确保浏览器能正确找到文件位置并显示
 ---
 在该目录下运行main.py，程序将网页映射到本地的5000端口：127.0.0.1:5000
