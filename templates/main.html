@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Choose</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
+</head>
+<body>
+    <div>
+        <form class="left" method="POST">
+            <!-- <img name="imgshow" src="C:/Users/18307/Desktop/imagechoose/static/tyler/2.jpg" class="img" id="imgshow"> -->
+            <img name="imgshow" src="/static/2.jpg" class="img" id="imgshow">
+        </form>
+        <div class="right">
+            <form class="box" method='POST'>
+                <input id="search" name="search" placeholder="请输入人名">
+                <input type="submit" id="searchbtn" name="searchbtn"></input> 
+            </form>
+            <form class="imgid" method='POST'>
+                <input type="text" id="idtext" name="idtext" placeholder="请输入图片序号">
+                <!-- <input type="submit" id="idsearchbtn" name="'idsearchbtn"></input> -->
+                <button type="submit" id="idsearchbtn" name="idsearchbtn" value=0 onclick="get_src_now_id()">搜索</button>
+            </form>
+            <form class="score" method='POST'>
+                <p>打分栏: </p>
+                <!-- <input type="submit" class="fit" id="fit" name="fit" value="适合"></input> -->
+                <!-- <input type="submit" class="ordinary" id="ordinary" name="ordinary" value="一般"></input>
+                <input type="submit" class="unfit" id="unfit" name="unfit" value="不适合"></input> -->
+                <button type="submit" class="fit" id="fit" name="fit" value=0 onclick="get_src_now_fit()">适合</button>
+                <button type="submit" class="ordinary" id="ordinary" name="ordinary" value=0 onclick="get_src_now_ordinary()">一般</button>
+                <button type="submit" class="unfit" id="unfit" name="unfit" value=0 onclick="get_src_now_unfit()">不适合</button>
+                
+            </form>
+            <form class="button2" method='POST'>
+                <button type="submit" class="previous" id="previous" name="previous" value=0 onclick="get_src_now_pre()">上一张</button>
+                <!-- <input type="submit" class="previous" id="previous" name="previous" value="上一张"></input> -->
+                <!-- <input type="submit" class="next" id="next" name="next_img" value="下一张"></input> -->
+                <button type="submit" class="next" id="next" name="next_img" value=0 onclick="get_src_now_next()">下一张</button>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="../static/main.js"></script>
+
+    <div id="dataid" d="{{data}}"></div>
+    <script>
+        var data = document.getElementById('dataid').getAttribute('d');//绑定以获取data值
+        data_json=JSON.parse(data);
+        img_src="/"+data_json.src
+        console.log(img_src)
+        var obj = document.getElementById("imgshow");
+        // window.alert(obj.getAttribute("src"));
+        obj.setAttribute("src", img_src);
+        // window.alert(obj.getAttribute("src"));
+    </script>
+    <script>
+        function get_src_now_pre(){
+            img_now_src=document.getElementById('imgshow').getAttribute('src')
+            document.getElementById('previous').value=img_now_src
+            return false
+        }
+        function get_src_now_next(){
+            img_now_src=document.getElementById('imgshow').getAttribute('src')
+            document.getElementById('next').value=img_now_src
+            return false
+        }
+        function get_src_now_id(){
+            img_now_src=document.getElementById('imgshow').getAttribute('src')
+            document.getElementById('idsearchbtn').value=img_now_src
+            return false
+        }
+        function get_src_now_fit(){
+            img_now_src=document.getElementById('imgshow').getAttribute('src')
+            document.getElementById('fit').value=img_now_src
+            return false
+        }
+        function get_src_now_ordinary(){
+            img_now_src=document.getElementById('imgshow').getAttribute('src')
+            document.getElementById('ordinary').value=img_now_src
+            return false
+        }
+        function get_src_now_unfit(){
+            img_now_src=document.getElementById('imgshow').getAttribute('src')
+            document.getElementById('unfit').value=img_now_src
+            return false
+        }
+
+    </script>
+</body>
+
+</html>
