@@ -14,7 +14,7 @@
     cd Dataset_imagechoose
     pip install -r requirements.txt
     
-之后大家需要按照后续指示将各自对应的图片文件夹下载到[static目录]下，确保浏览器能正确找到文件位置并显示
+之后大家需要按照后续指示将各自对应的图片文件夹下载到`static目录`下，确保浏览器能正确找到文件位置并显示
 
 ---
 
