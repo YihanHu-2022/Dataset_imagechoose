@@ -26,4 +26,4 @@
 ---
 筛选过程中大家依据图片对上述标准的符合程度将其分为：合适、一般、不合适三类
 合适的图片类似如下几张：
-![alt](\example_imgs\good.jpg)
+![alt](/example_imgs/good.jpg)
