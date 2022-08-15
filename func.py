@@ -102,7 +102,7 @@ def get_pre_image(image_src):
     imagelist = get_img_file(fname)
     img_tmp = imagelist_to_attr(imagelist)
     fid = match_class(image_src, img_tmp)
-    first_id = int(img_tmp[0].id)
+    first_id = int(img_tmp[0].index)
     if int(fid) == first_id:
         return False  # 收到返回false在页面alert("当前为第一张")
     else:
@@ -120,7 +120,7 @@ def get_next_image(image_src):
     img_tmp = imagelist_to_attr(imagelist)
     fid = match_class(image_src, img_tmp)
     img_len = len(img_tmp)
-    last_id = int(img_tmp[img_len-1].id)
+    last_id = int(img_tmp[img_len-1].index)
     if int(fid) == last_id:
         return False  # 收到返回false在页面alert("当前为最后一张")
     else:
