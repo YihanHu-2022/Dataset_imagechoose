@@ -26,6 +26,7 @@ def index():
             data = {
                 'name': img[0].name,
                 'id': img[0].id,
+                'index': img[0].index,
                 'score': img[0].score,
                 'src': img[0].src
             }
@@ -39,13 +40,13 @@ def index():
             name_split = src_now.split('/')[-2]
             name = name_split.split('/')[-1]
             result = func.id_search(name, fid)
-            print(result.split(' '))
-            img = func.imagelist_to_attr(result.split(' '))
+            img = result
             data = {
-                'name': img[0].name,
-                'id': img[0].id,
-                'score': img[0].score,
-                'src': img[0].src
+                'name': result.name,
+                'id': result.id,
+                'index': result.index,
+                'score': result.score,
+                'src': result.src
             }
             print(data)
             data_json = json.dumps(data, ensure_ascii=False)
@@ -63,12 +64,13 @@ def index():
             if result == False:
                 return render_template('error.html')
             else:
-                img = func.imagelist_to_attr(result.split(' '))
+                img = result
                 data = {
-                    'name': img[0].name,
-                    'id': img[0].id,
-                    'score': img[0].score,
-                    'src': img[0].src
+                    'name': result.name,
+                    'id': result.id,
+                    'index': result.index,
+                    'score': result.score,
+                    'src': result.src
                 }
                 print(data)
                 data_json = json.dumps(data, ensure_ascii=False)
@@ -87,12 +89,13 @@ def index():
             if result == False:
                 return render_template('error.html')
             else:
-                img = func.imagelist_to_attr(result.split(' '))
+                img = result
                 data = {
-                    'name': img[0].name,
-                    'id': img[0].id,
-                    'score': img[0].score,
-                    'src': img[0].src
+                    'name': result.name,
+                    'id': result.id,
+                    'index': result.index,
+                    'score': result.score,
+                    'src': result.src
                 }
                 print(data)
                 data_json = json.dumps(data, ensure_ascii=False)
@@ -111,12 +114,13 @@ def index():
             if result == False:
                 return render_template('error.html')
             else:
-                img = func.imagelist_to_attr(result.split(' '))
+                img = result
                 data = {
-                    'name': img[0].name,
-                    'id': img[0].id,
-                    'score': img[0].score,
-                    'src': img[0].src
+                    'name': result.name,
+                    'id': result.id,
+                    'index': result.index,
+                    'score': result.score,
+                    'src': result.src
                 }
                 print(data)
                 data_json = json.dumps(data, ensure_ascii=False)
@@ -131,12 +135,13 @@ def index():
             if result == False:
                 return render_template('error.html')
             else:
-                img = func.imagelist_to_attr(result.split(' '))
+                img = result
                 data = {
-                    'name': img[0].name,
-                    'id': img[0].id,
-                    'score': img[0].score,
-                    'src': img[0].src
+                    'name': result.name,
+                    'id': result.id,
+                    'index': result.index,
+                    'score': result.score,
+                    'src': result.src
                 }
                 print(data)
                 data_json = json.dumps(data, ensure_ascii=False)
@@ -151,12 +156,13 @@ def index():
             if result == False:
                 return render_template('error.html')
             else:
-                img = func.imagelist_to_attr(result.split(' '))
+                img = result
                 data = {
-                    'name': img[0].name,
-                    'id': img[0].id,
-                    'score': img[0].score,
-                    'src': img[0].src
+                    'name': result.name,
+                    'id': result.id,
+                    'index': result.index,
+                    'score': result.score,
+                    'src': result.src
                 }
                 print(data)
                 data_json = json.dumps(data, ensure_ascii=False)

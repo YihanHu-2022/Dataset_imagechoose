@@ -3,9 +3,10 @@ import os
 
 class image_class:
     # 定义图像对象，name人名，id序号，score存放评分（合适2，一般1，不合适0 方便统计），src存放相对路径
-    def __init__(self, name, fid, score, src):
+    def __init__(self, name, fid, index, score, src):
         self.name = name
         self.id = fid
+        self.index = index
         self.score = score
         self.src = src
 
@@ -20,11 +21,9 @@ def get_img_file(file_name):
     imagelist = []
     root = os.getcwd()
     filenames = sorted(os.listdir(os.path.join(root, 'static', file_name)))
-    print(os.path.join(root, 'static', file_name))
     for filename in filenames:
         if filename.lower().endswith(('.bmp', '.dib', '.png', '.jpg', '.jpeg', '.pbm', '.pgm', '.ppm', '.tif', '.tiff')):
             imagelist.append(os.path.join('static', file_name, filename).replace('\\', '/'))
-    print(imagelist)
     return imagelist
 
 
@@ -36,7 +35,8 @@ def imagelist_to_attr(imagelist):
         fname = imagelist[i].split("/")[-2]
         imgname = imagelist[i].split("/")[-1]
         fid = imgname.split(".")[0]
-        img_temp.append(image_class(fname, fid, -1, imagelist[i]))
+        index = str(i+1)
+        img_temp.append(image_class(fname, fid, index, -1, imagelist[i]))
 
     return img_temp
 
@@ -50,8 +50,8 @@ def id_search(file_name, fid):
         return imgfile_len  # 输入id号大于人物文件夹里图片数，返回图片数，在页面中alert最大输入id
     else:
         for i in range(len(img_tmp)):
-            if int(img_tmp[i].id) == int(fid):
-                return imagelist[i]
+            if int(img_tmp[i].index) == int(fid):
+                return img_tmp[i]
 
 
 def get_score_fit(image_src):
@@ -59,11 +59,11 @@ def get_score_fit(image_src):
     # 合适，score记2
     fname = image_src.split("/")[-2]
     imgname = image_src.split("/")[-1]
-    fid = imgname.split(".")[0]
     imagelist = get_img_file(fname)
     img_tmp = imagelist_to_attr(imagelist)
+    fid = match_class(image_src, img_tmp)
     for i in range(len(img_tmp)):
-        if int(img_tmp[i].id) == int(fid):
+        if int(img_tmp[i].index) == int(fid):
             img_tmp[i].score = 2
     return img_tmp
 
@@ -72,11 +72,11 @@ def get_score_ordinary(image_src):
     # 一般，score记1
     fname = image_src.split("/")[-2]
     imgname = image_src.split("/")[-1]
-    fid = imgname.split(".")[0]
     imagelist = get_img_file(fname)
     img_tmp = imagelist_to_attr(imagelist)
+    fid = match_class(image_src, img_tmp)
     for i in range(len(img_tmp)):
-        if int(img_tmp[i].id) == int(fid):
+        if int(img_tmp[i].index) == int(fid):
             img_tmp[i].score = 1
     return img_tmp
 
@@ -85,11 +85,11 @@ def get_score_unfit(image_src):
     # 不合适，score记0
     fname = image_src.split("/")[-2]
     imgname = image_src.split("/")[-1]
-    fid = imgname.split(".")[0]
     imagelist = get_img_file(fname)
     img_tmp = imagelist_to_attr(imagelist)
+    fid = match_class(image_src, img_tmp)
     for i in range(len(img_tmp)):
-        if int(img_tmp[i].id) == int(fid):
+        if int(img_tmp[i].index) == int(fid):
             img_tmp[i].score = 0
     return img_tmp
 
@@ -99,9 +99,9 @@ def get_pre_image(image_src):
     image_src = image_src.replace('\\', '/')
     fname = image_src.split("/")[-2]
     imgname = image_src.split("/")[-1]
-    fid = imgname.split(".")[0]
     imagelist = get_img_file(fname)
     img_tmp = imagelist_to_attr(imagelist)
+    fid = match_class(image_src, img_tmp)
     first_id = int(img_tmp[0].id)
     if int(fid) == first_id:
         return False  # 收到返回false在页面alert("当前为第一张")
@@ -115,9 +115,10 @@ def get_next_image(image_src):
     image_src = image_src.replace('\\', '/')
     fname = image_src.split("/")[-2]
     imgname = image_src.split("/")[-1]
-    fid = imgname.split(".")[0]
+    # fid = imgname.split(".")[0]
     imagelist = get_img_file(fname)
     img_tmp = imagelist_to_attr(imagelist)
+    fid = match_class(image_src, img_tmp)
     img_len = len(img_tmp)
     last_id = int(img_tmp[img_len-1].id)
     if int(fid) == last_id:
@@ -125,3 +126,9 @@ def get_next_image(image_src):
     else:
         id_next = int(fid)+1
         return id_search(fname, id_next)
+
+def match_class(image_src, imagelist):
+    for image in  imagelist:
+        image_s = image.src
+        if image_src in image_s:
+            return image.index
