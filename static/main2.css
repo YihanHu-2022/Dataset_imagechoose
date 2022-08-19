@@ -1,0 +1,40 @@
+*{
+    font-size: 20px;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.imageshow{
+    /* background-color: antiquewhite; */
+    padding:30px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow:auto;
+}
+
+.img{
+    width:40%;
+    height:100%;
+    float: left;
+    margin-left: 10px;
+}
+
+.imglabel{
+    width:40%;
+    height:100%;
+    float: right;
+    margin-right: 10px;
+} 
+.operate{
+    width: 100%;
+    text-align: center;
+}
+
+.ordinary,.unfit,.next{
+    margin-left: 20px;
+}
+
+.box,.score,.imgid,.button2{
+    margin-top: 8px;
+}

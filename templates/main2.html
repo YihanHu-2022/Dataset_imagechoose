@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Image Choose</title>
+    <title>label Choose</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../static/main.css">
+    <link rel="stylesheet" type="text/css" href="../static/main2.css">
 </head>
 <body>
     <div>
-        <form class="left" method="POST">
-            <img name="imgshow" src="#" class="img" id="imgshow">
+        <form class="imageshow" method="POST">
+            <img src="#" name="img" id="img" class="img">
+            <img src="#" name="imglabel" id="imglabel" class="imglabel">
         </form>
-        <div class="right">
+        <div class="operate">
             <form class="box" method='POST'>
                 <input id="search" name="search" placeholder="请输入人名">
-                <input type="submit" id="searchbtn" name="searchbtn"></input> 
+                <input type="submit" id="searchbtn" name="searchbtn" value="搜索"></input> 
             </form>
-            <form class="imgid" method='POST'>
+            <form class="score" method="POST">
+                <p>打分栏:
+                <button type="submit" class="fit" id="fit" name="fit" value=0 onclick="get_src_now_fit()">适合</button>
+                <button type="submit" class="ordinary" id="ordinary" name="ordinary" value=0 onclick="get_src_now_ordinary()">一般</button>
+                <button type="submit" class="unfit" id="unfit" name="unfit" value=0 onclick="get_src_now_unfit()">不适合</button>
+                </p>
+            </form>
+            <form class="imgid" method="POST">
                 <input type="text" id="idtext" name="idtext" placeholder="请输入图片序号">
                 <button type="submit" id="idsearchbtn" name="idsearchbtn" value=0 onclick="get_src_now_id()">搜索</button>
             </form>
@@ -23,64 +31,64 @@
                 <p>当前序号: </p>
                 <input id="index" type="text" value="-1">
             </form>
-            <form class="score" method='POST'>
-                <p>打分栏: </p>
-                <button type="submit" class="fit" id="fit" name="fit" value=0 onclick="get_src_now_fit()">适合</button>
-                <button type="submit" class="ordinary" id="ordinary" name="ordinary" value=0 onclick="get_src_now_ordinary()">一般</button>
-                <button type="submit" class="unfit" id="unfit" name="unfit" value=0 onclick="get_src_now_unfit()">不适合</button>
-                
-            </form>
-            <form class="button2" method='POST'>
+            
+            <form class="button2" method="POST">
                 <button type="submit" class="previous" id="previous" name="previous" value=0 onclick="get_src_now_pre()">上一张</button>
                 <button type="submit" class="next" id="next" name="next_img" value=0 onclick="get_src_now_next()">下一张</button>
             </form>
         </div>
+        
     </div>
-    <script type="text/javascript" src="../static/main.js"></script>
-
+    
+    <script type="text/javascript" src="../static/main2.js"></script>
+    
     <div id="dataid" d="{{data}}"></div>
     <script>
         var data = document.getElementById('dataid').getAttribute('d');//绑定以获取data值
         data_json=JSON.parse(data);
-        img_src="/"+data_json.src
+        // img_src="C:/Users/1/Desktop/Pseudo-Matting/labelchoose/"+data_json.src
+        img_src=data_json.src
         console.log(img_src)
-        var obj = document.getElementById("imgshow");
-        obj.setAttribute("src", img_src);
-        // window.alert(obj.getAttribute("src"))
-        var obj2 = document.getElementById("index");
-        obj2.setAttribute("value", data_json.index)
-        // window.alert(obj.getAttribute("src"))
-        // window.alert(obj2.getAttribute("value"))
+        var obj1 = document.getElementById("img");
+        obj1.setAttribute("src", img_src);
+
+        img_label_src=img_src.replace('image','label')
+        console.log(img_label_src)
+        var obj2 = document.getElementById("imglabel");
+        obj2.setAttribute("src", img_label_src);
+
+        var obj3 = document.getElementById("index");
+        obj3.setAttribute("value", data_json.index)
         
     </script>
     <script>
         function get_src_now_pre(){
-            img_now_src=document.getElementById('imgshow').getAttribute('src')
+            img_now_src=document.getElementById('img').getAttribute('src')
             document.getElementById('previous').value=img_now_src
             return false
         }
         function get_src_now_next(){
-            img_now_src=document.getElementById('imgshow').getAttribute('src')
+            img_now_src=document.getElementById('img').getAttribute('src')
             document.getElementById('next').value=img_now_src
             return false
         }
         function get_src_now_id(){
-            img_now_src=document.getElementById('imgshow').getAttribute('src')
+            img_now_src=document.getElementById('img').getAttribute('src')
             document.getElementById('idsearchbtn').value=img_now_src
             return false
         }
         function get_src_now_fit(){
-            img_now_src=document.getElementById('imgshow').getAttribute('src')
+            img_now_src=document.getElementById('img').getAttribute('src')
             document.getElementById('fit').value=img_now_src
             return false
         }
         function get_src_now_ordinary(){
-            img_now_src=document.getElementById('imgshow').getAttribute('src')
+            img_now_src=document.getElementById('img').getAttribute('src')
             document.getElementById('ordinary').value=img_now_src
             return false
         }
         function get_src_now_unfit(){
-            img_now_src=document.getElementById('imgshow').getAttribute('src')
+            img_now_src=document.getElementById('img').getAttribute('src')
             document.getElementById('unfit').value=img_now_src
             return false
         }
